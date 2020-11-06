@@ -109,7 +109,7 @@
                             <button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
                         </form>
 
-                         <form class='editFormPopUp'  onsubmit='submitEditedForm()' >
+                         <form class='editFormPopUp'  >
                             <input type='text' value='${feed.name}'>
                             <input type='text' value='${feed.content}'>
                             <button type='submit'  >Update Changes</button
@@ -168,7 +168,7 @@
                 </form>
 
 
-                <form class='editFormPopUp'  onsubmit='submitEditedForm()' >
+                <form class='editFormPopUp' >
                 
                     <input type='text' value='${feed.name}'>
                     <input type='text' value='${feed.content}'>
@@ -207,44 +207,6 @@
 
 
         }
-
-
-
-
-
-        // see social media main.js. This needed to be nested inside the for loop!!!
-        function updateButtonForLoop() {
-            let updateButton = document.querySelectorAll('.updateButton');
-            let editFormPopUp = document.querySelectorAll('.editFormPopUp');
-
-            for (let i = 0; i < updateButton.length; i++) {
-                updateButton[i].addEventListener('click', () => {
-                    if (editFormPopUp[i].style.opacity == 1) {
-                        editFormPopUp[i].style.opacity = 0;
-                    } else {
-                        editFormPopUp[i].style.opacity = 1;
-                    }
-
-
-
-                })
-
-            }
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -293,7 +255,7 @@
                                 <button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
                             </form>
 
-                             <form class='editFormPopUp'  onsubmit='submitEditedForm()' >
+                             <form class='editFormPopUp'  >
                                 
                                     <input type='text' value='${feed.name}'>
                                     <input type='text' value='${feed.content}'>
@@ -334,6 +296,32 @@
 
 
 
+
+
+
+        }
+
+
+
+
+        // see social media main.js. This needed to be nested inside the for loop!!!
+        function updateButtonForLoop() {
+            let updateButton = document.querySelectorAll('.updateButton');
+            let editFormPopUp = document.querySelectorAll('.editFormPopUp');
+
+            for (let i = 0; i < updateButton.length; i++) {
+                updateButton[i].addEventListener('click', () => {
+                    if (editFormPopUp[i].style.opacity == 1) {
+                        editFormPopUp[i].style.opacity = 0;
+                    } else {
+                        editFormPopUp[i].style.opacity = 1;
+                    }
+
+
+
+                })
+
+            }
 
 
 
