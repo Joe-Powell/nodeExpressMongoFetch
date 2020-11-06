@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+<body>
+    HOME PAGE IN HBS
+
+
+    <form class='postForm' action='/' method='post' onsubmit="sendprevent()">
+        <div class="form-group">
+            <label>name</label>
+            <input type="text" name='name' class="form-control">
+
+        </div>
+        <div class="form-group">
+            <label>Post it</label>
+            <input type="text" name='content' class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="sendprevent()">Submit</button>
+    </form>
+
+
+
+
+    {{#each data}}
+    <div class='data'>
+        <p>Name: {{this.name}}</p>
+        <p>content: {{this.content}}</p>
+
+
+
+        <form action='/{{this._id}}' method='post' class='deleteForm'>
+            <button type='submit'>Delete</button>
+        </form>
+
+        <form class='updateForm'>
+            <button type='submit'>Update</button>
+        </form>
+
+    </div>
+    {{/each}}
+
+
+    <script>
+        const sendprevent = (e) => {
+
+            console.log('prevent');
+
+            
+
+        }
+
+        console.log('loaded')
+
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+delete 
+
+  function deleteWithFetch(grabId) {
+
+            let body = { id: grabId };
+            console.log(body.id);
+            console.log(grabId);
+
+             fetch('/delete', {
+                method: 'delete',
+                headers: {
+                    'content-type': 'application/json',
+                },
+
+                body: JSON.stringify(body)
+
+            })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json()
+                    }
+                    throw new error('request failed');
+                })
+                .then((data) => console.log(data))
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+
+
+        }

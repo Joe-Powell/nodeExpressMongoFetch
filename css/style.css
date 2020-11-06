@@ -1,0 +1,68 @@
+
+/* bootstrap involved so using !important */
+
+
+* {
+    font-family: sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    line-height: 24px!important;
+    
+}
+
+.postForm {
+    border:1px solid #333 ;
+    width:50vw;
+    margin:50px auto;
+    padding: 5%;
+    background-color: lightblue;
+}
+
+
+.form-control {
+    width: 30vw;
+    
+}
+
+.deleteForm, .updateForm {
+    display: inline-block;
+    
+}
+
+.deleteForm button{
+   
+    border:none;
+    background-color: red;
+    padding: 3px;
+    
+}
+.updateForm button{
+    display: inline-block;
+    border:none;
+    background-color: rgb(28, 73, 197);
+    padding: 3px;
+    
+}
+.editFormPopUp {
+    opacity: 0;
+}
+
+
+
+.data {
+    width: 500px;
+    margin:auto;
+    height:fit-content;
+   background-color: rgb(170, 91, 91);
+
+
+}
+
+p {
+   padding: 0px 3px; ; 
+   margin-bottom: 1px!important;
+   height:fit-content!important;
+   
+   
+}

@@ -1,0 +1,27 @@
+app.js
+this is the server not a front end. 
+it works between the front end and the database.
+
+.hbs files need to be inside of a views folder
+
+
+inside a try{ } each line is the then....
+its ike a promise without putting .then after 
+
+
+ /****** instead of create you can use save() also ***/////
+         this is with save() which is more used than create above
+        try {
+
+            const input = new Inputs({
+               name: req.body.name,
+               content: req.body.content
+           });
+           const savedPost = await input.save();
+           res.json(savedPost);
+
+      } catch (err) {
+           res.json(err)
+         }
+
+

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+
+<body>
+    HOME PAGE IN HBS
+
+
+
+
+    <form class='postForm'>
+        <div class="form-group">
+            <label>name</label>
+            <input type="text" name='name' class="form-control">
+
+        </div>
+        <div class="form-group">
+            <label>Post it</label>
+            <input type="text" name='content' class="form-control">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="sendPost()">Submit</button>
+    </form>
+
+
+
+
+    <div id="responseField">
+
+    </div>
+
+
+
+    {{!-- {{#each data}}
+    <div class='data'>
+        <p>Name: {{this.name}}</p>
+        <p>content: {{this.content}}</p>
+
+
+
+        <form action='/{{this._id}}' method='post' class='deleteForm'>
+            <button type='submit'>Delete</button>
+        </form>
+
+        <form class='updateForm'>
+            <button type='submit'>Update</button>
+        </form>
+
+    </div>
+    {{/each}} --}}
+
+
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+
+    <script>
+
+        const responseField = document.querySelector('#responseField');
+
+
+        function sendPost(e) {
+            //e.preventDefault(); button is type='button'
+            let postForm = document.querySelector('.postForm');
+            console.log('Clicked');
+            console.log(postForm.name.value);
+            console.log(postForm.content.value);
+
+            let name = postForm.name.value;
+            let content = postForm.content.value;
+
+            let body = { name: name, content: content }
+
+            fetch('/newPost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            })
+                .then(response => response.json())
+                .then(theResponse => {
+                    console.log('The response = ', theResponse.posts);
+
+                    let content = '<h2>Posts</h2>';
+                    theResponse.posts.forEach((feed) => {
+
+                        content += `
+                        <div class='data'>
+                        <p>Id: ${feed._id}</p>
+                        <p>Name: ${feed.name}</p>
+                        <p>content: ${feed.content}</p>
+
+
+
+                        <form class='deleteForm'>
+                            <button type='button' id='${feed._id}'  onclick='deleteWithFetch(this.id)'><ion-icon name="trash-outline"></ion-icon>Delete</button>
+                        </form>
+
+                        <form class='updateForm'>
+                            <button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
+                        </form>
+
+                         <form class='editFormPopUp'  onsubmit='submitEditedForm()' >
+                            <input type='text' value='${feed.name}'>
+                            <input type='text' value='${feed.content}'>
+                            <button type='submit'  >Update Changes</button
+
+                        </form>
+
+                    </div>
+                                        
+                        
+                          `;
+
+                        responseField.innerHTML = content;
+                        // nested for loop
+                        updateButtonForLoop();
+
+                    })
+
+
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+
+
+        }
+
+        console.log('loaded page');
+
+        // after page loads behind the scenes fetch will recieve the data from /load
+        function getData() {
+            console.log('getData function fired');
+
+            fetch('/load')
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data.posts)
+                    let content = '<h2>Posts</h2>';
+                    data.posts.forEach((feed) => {
+
+                        content += `<div class='data'>
+                <p>Id: ${feed._id}</p>
+                <p>Name: ${feed.name}</p>
+                <p>content: ${feed.content}</p>
+
+
+
+                <form class='deleteForm'>
+                    <button type='button'  id='${feed._id}'  onclick='deleteWithFetch(this.id)'><ion-icon name="trash-outline"></ion-icon>Delete</button>
+              
+                </form>
+
+                <form class='updateForm'>
+                    <button type='button' class='updateButton' ><ion-icon name="pencil-outline"></ion-icon>Update</button>
+                </form>
+
+
+                <form class='editFormPopUp'  onsubmit='submitEditedForm()' >
+                
+                    <input type='text' value='${feed.name}'>
+                    <input type='text' value='${feed.content}'>
+                    <button type='submit'  >Update Changes</button
+
+                    </form>
+
+            </div>
+                
+                
+                  `;
+
+                        responseField.innerHTML = content;
+
+
+                        // nested for loop
+                        updateButtonForLoop();
+
+
+
+                    })
+
+
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+        // see social media main.js. This needed to be nested inside the for loop!!!
+        function updateButtonForLoop() {
+            let updateButton = document.querySelectorAll('.updateButton');
+            let editFormPopUp = document.querySelectorAll('.editFormPopUp');
+
+            for (let i = 0; i < updateButton.length; i++) {
+                updateButton[i].addEventListener('click', () => {
+                    if (editFormPopUp[i].style.opacity == 1) {
+                        editFormPopUp[i].style.opacity = 0;
+                    } else {
+                        editFormPopUp[i].style.opacity = 1;
+                    }
+
+
+
+                })
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function deleteWithFetch(grabId) {
+
+            let body = { id: grabId };
+            console.log(body.id);
+
+            fetch('/delete', {
+                method: 'delete',
+                headers: {
+                    'content-type': 'application/json',
+                },
+
+                body: JSON.stringify(body)
+
+            })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json()
+                    }
+                    throw new error('request failed');
+                })
+                .then((data) => {
+                    console.log(data.posts);
+                    let content = '<h2>Posts</h2>';
+
+                    console.log(data.posts.length); // this if statement made so that when you hit delete on the last item, it wont leave a blank post
+                    if (data.posts.length > 0) {
+                        data.posts.forEach((feed) => {
+
+
+                            content += `<div class='data'>
+                            <p>Id: ${feed._id}</p>
+                            <p>Name: ${feed.name}</p>
+                            <p>content: ${feed.content}</p>
+
+
+
+                            <form class='deleteForm'>
+                                <button type='button' id='${feed._id}'  onclick='deleteWithFetch(this.id)'><ion-icon name="trash-outline"></ion-icon>Delete</button>
+                        
+                            </form>
+
+                            <form class='updateForm'>
+                                <button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
+                            </form>
+
+                             <form class='editFormPopUp'  onsubmit='submitEditedForm()' >
+                                
+                                    <input type='text' value='${feed.name}'>
+                                    <input type='text' value='${feed.content}'>
+                                    <button type='submit'  >Update Changes</button
+
+                                    </form>
+
+                        </div>
+                            
+                            
+                            `;
+
+                            responseField.innerHTML = content;
+                            // nested for loop
+                            updateButtonForLoop();
+
+
+
+                        })//endForEach here 
+                    } else {
+                        responseField.innerHTML = content;
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        getData();
+
+    </script>
+
+</body>
+
+</html>
