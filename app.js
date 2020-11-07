@@ -152,6 +152,26 @@ app.delete('/delete', async (req, res) => {
 
 
 
+app.patch('/updatePost', async (req, res) => {
+
+    try {
+        await Inputs.update(
+            { _id: req.body.id },
+            { $set: { name: req.body.name, content: req.body.content } }
+        );
+        const updatedPosts = await Inputs.find();
+        res.json(updatedPosts);
+
+    } catch (err) {
+        res.json({ message: err });
+    }
+
+})
+
+
+//const posts = await Inputs.find();
+
+//res.json({ posts: posts })
 
 
 

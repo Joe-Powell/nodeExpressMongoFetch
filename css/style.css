@@ -30,13 +30,14 @@
     
 }
 
-.deleteForm button{
-   
+
+
+.deleteButton {
     border:none;
-    background-color: red;
+    background: red;
     padding: 3px;
-    
 }
+
 .updateForm button{
     display: inline-block;
     border:none;
@@ -46,6 +47,7 @@
 }
 .editFormPopUp {
     opacity: 0;
+    transition: 2s;
 }
 
 
