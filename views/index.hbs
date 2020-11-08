@@ -99,7 +99,7 @@
 
 
                 <form class='editFormPopUp'  >
-				<input type='text' name='name'  value='${feed.name}'>
+				<input type='text' class='idle' name='name'  value='${feed.name}'>
 				<input type='text' name='content'  value='${feed.content}'>
 				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
@@ -182,7 +182,7 @@
                         </form>
 
                         <form class='editFormPopUp'  >
-				<input type='text' name='name'  value='${feed.name}'>
+				<input type='text' class='idle' name='name'  value='${feed.name}'>
 				<input type='text' name='content'  value='${feed.content}'>
 				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
@@ -258,9 +258,11 @@
 			<button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
 		</form>
 
+		  
+
 			<form class='editFormPopUp'  >
 				<input type='text' name='name'  value='${feed.name}'>
-				<input type='text' name='content'  value='${feed.content}'>
+				<input type='text' class='idle' name='content'  value='${feed.content}'>
 				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
 				</form>
@@ -309,6 +311,7 @@
 			let editFormPopUp = document.querySelectorAll('.editFormPopUp');
 			for (let i = 0; i < editFormPopUp.length; i++) {
 				editFormPopUp[i].addEventListener('click', () => {
+
 					console.log('the applyChanges function', editFormPopUp[i].name.value)
 					let id = theId;
 					let name = editFormPopUp[i].name.value;
@@ -341,12 +344,13 @@
                             <button type='button' id='${feed._id}' class='deleteButton'  onclick='deleteWithFetch(this.id)'><ion-icon name="trash-outline"></ion-icon>Delete</button>
                         </form>
 
-                        <form class='updateForm'>
-                            <button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
-                        </form>
+                        
+						<form class='updateForm'>
+							<button type='button' class='updateButton'><ion-icon name="pencil-outline"></ion-icon>Update</button>
+						</form>
 
                         <form class='editFormPopUp'  >
-				<input type='text' name='name'  value='${feed.name}'>
+				<input type='text' class='idle' name='name'  value='${feed.name}'>
 				<input type='text' name='content'  value='${feed.content}'>
 				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
@@ -396,6 +400,8 @@
 
 			for (let i = 0; i < updateButton.length; i++) {
 				updateButton[i].addEventListener('click', () => {
+					const idle = document.querySelectorAll('.idle');
+					idle[i].focus();
 					if (editFormPopUp[i].style.opacity == 1) {
 						editFormPopUp[i].style.opacity = 0;
 					} else {

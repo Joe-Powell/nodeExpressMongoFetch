@@ -50,6 +50,15 @@
     transition: 2s;
 }
 
+.editFormPopUp input {
+    background-color: rgb(40,44,53) ;
+    color:#bfe2e2;
+    width: 120px;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+}
+
 
 
 .data {
