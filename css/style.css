@@ -9,6 +9,11 @@
     box-sizing: border-box;
     line-height: 24px!important;
     
+    
+}
+
+body{
+    background-color: #333;
 }
 
 .postForm {
@@ -16,7 +21,7 @@
     width:50vw;
     margin:50px auto;
     padding: 5%;
-    background-color: lightblue;
+    background-color: rgb(170, 91, 91);
 }
 
 
@@ -46,6 +51,7 @@
     
 }
 .editFormPopUp {
+    display:inline-block;
     opacity: 0;
     transition: 2s;
 }
@@ -62,7 +68,7 @@
 
 
 .data {
-    width: 500px;
+    width: 550px;
     margin:auto;
     height:fit-content;
    background-color: rgb(170, 91, 91);
