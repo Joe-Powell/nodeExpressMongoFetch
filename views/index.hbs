@@ -101,7 +101,7 @@
                 <form class='editFormPopUp'  >
 				<input type='text' class='idle' name='name'  value='${feed.name}'>
 				<input type='text' name='content'  value='${feed.content}'>
-				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
+				<button type='submit' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
 				</form>
 
@@ -184,7 +184,7 @@
                         <form class='editFormPopUp'  >
 				<input type='text' class='idle' name='name'  value='${feed.name}'>
 				<input type='text' name='content'  value='${feed.content}'>
-				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
+				<button type='submit' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
 				</form>
 
@@ -263,7 +263,7 @@
 			<form class='editFormPopUp'  >
 				<input type='text' name='name'  value='${feed.name}'>
 				<input type='text' class='idle' name='content'  value='${feed.content}'>
-				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
+				<button type='submit' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
 				</form>
 
@@ -310,8 +310,8 @@
 
 			let editFormPopUp = document.querySelectorAll('.editFormPopUp');
 			for (let i = 0; i < editFormPopUp.length; i++) {
-				editFormPopUp[i].addEventListener('click', () => {
-
+				editFormPopUp[i].addEventListener('submit', (e) => {
+					e.preventDefault();
 					console.log('the applyChanges function', editFormPopUp[i].name.value)
 					let id = theId;
 					let name = editFormPopUp[i].name.value;
@@ -352,7 +352,7 @@
                         <form class='editFormPopUp'  >
 				<input type='text' class='idle' name='name'  value='${feed.name}'>
 				<input type='text' name='content'  value='${feed.content}'>
-				<button type='button' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
+				<button type='submit' class='updateChanges'  id='${feed._id}' onclick='applyChanges(this.id)'  >Update Changes</button
 
 				</form>
 
